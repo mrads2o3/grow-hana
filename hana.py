@@ -2,8 +2,8 @@ import requests
 import json
 import time
 from datetime import datetime
-from colorama import init, Fore, Style
 import math
+import logging
 
 def refresh_access_token(refresh_token):
     url = f"https://securetoken.googleapis.com/v1/token?key=AIzaSyDipzN0VRfTPnMGhQ5PSzO27Cxm3DohJGY"
@@ -42,7 +42,7 @@ def waitCountDown(sleepTime):
     print(f'Wait for {sleepTime} second')
     waitTimes = math.ceil(sleepTime / 10)
     for m in range(sleepTime, 0, -(waitTimes)):
-        print(f"{m} second left")
+        print(f"{m} second left", end='\r')
         time.sleep(waitTimes)
 
 def main():
@@ -90,5 +90,5 @@ def main():
         except Exception as e:
             print(f"Error: {e}")
             time.sleep(10)
-            loop = False
+            main()
 main()
