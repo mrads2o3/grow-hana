@@ -48,7 +48,7 @@ def waitCountDown(sleepTime):
 def main():
     refresh_token = load_refresh_token_from_file()
     access_token_info = refresh_access_token(refresh_token)
-    access_token = access_tokaen_info["access_token"]
+    access_token = access_token_info["access_token"]
     refresh_token = access_token_info.get("refresh_token", refresh_token)
     loop = True
     while loop:
