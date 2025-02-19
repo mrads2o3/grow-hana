@@ -77,7 +77,7 @@ def main():
                 print(f"+ Multiply Rate   : {growAction.get('multiplyRate')}")
                 print(f"+ Time            : {formattedTime}")
                 print("------------------------------------------")
-                print("Grow complete, wait for 30 minutes...")
+                print("Grow complete...")
                 waitCountDown(1800)
             else :
                 error_code = res["errors"][0]["extensions"]["code"]
@@ -85,7 +85,7 @@ def main():
                     print("Unauthorized, try running again...", end='\r')
                     main()
                 elif error_code == "NO_ACTION_COUNTS_REMAINING":
-                    print(f"{formattedTime} : No action counts remaining, waiting for 60 seconds...")
+                    print(f"{formattedTime} : No action counts remaining...")
                     waitCountDown(60)
         except Exception as e:
             print(f"Error: {e}")
