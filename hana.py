@@ -48,10 +48,12 @@ def waitCountDown(sleepTime):
 def main():
     refresh_token = load_refresh_token_from_file()
     access_token_info = refresh_access_token(refresh_token)
-    access_token = access_token_info["access_token"]
+    access_token = access_tokaen_info["access_token"]
     refresh_token = access_token_info.get("refresh_token", refresh_token)
     loop = True
     while loop:
+        currentTime = datetime.now()
+        formattedTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
         print("Try to grow...", end='\r')
         try:
             hana_url = "https://hanafuda-backend-app-520478841386.us-central1.run.app/graphql"
@@ -73,19 +75,17 @@ def main():
                 print(f"+ Leveraged Value : {growAction.get('leveragedValue')}")
                 print(f"+ Total Value     : {growAction.get('totalValue')}")
                 print(f"+ Multiply Rate   : {growAction.get('multiplyRate')}")
-                currentTime = datetime.now()
-                formattedTime = currentTime.strftime("%Y-%m-%d %H:%M:%S")
                 print(f"+ Time            : {formattedTime}")
                 print("------------------------------------------")
-                print("Grow complete, wait for 60 minutes...")
-                waitCountDown(3600)
+                print("Grow complete, wait for 30 minutes...")
+                waitCountDown(1800)
             else :
                 error_code = res["errors"][0]["extensions"]["code"]
                 if error_code == "UNAUTHORIZED":
                     print("Unauthorized, try running again...", end='\r')
                     main()
                 elif error_code == "NO_ACTION_COUNTS_REMAINING":
-                    print("No action counts remaining, waiting for 60 seconds...")
+                    print(f"{formattedTime} : No action counts remaining, waiting for 60 seconds...")
                     waitCountDown(60)
         except Exception as e:
             print(f"Error: {e}")
